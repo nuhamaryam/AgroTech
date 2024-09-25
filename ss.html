@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Started</title>
+<style>
+    /* Resetting default margin and padding */
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    /* Background image */
+    body {
+        background-image: url('ss.jpg');
+        background-size: cover;
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Navigation bar styles */
+    .navbar {
+        background-color: transparent; /* Dark background color */
+        padding: 10px 20px; /* Padding for the navbar */
+        text-align: center;
+        color: #fff; /* White text color */
+        position: fixed; /* Fixed position so it remains visible when scrolling */
+        width: 100%; /* Full width */
+        z-index: 999; /* Ensure the navbar is on top */
+        display: flex; /* Use flexbox for layout */
+        justify-content: space-between; /* Space between items */
+        align-items: center; /* Center items vertically */
+    }
+
+    .navbar-items {
+        display: flex; /* Use flexbox for layout */
+    }
+
+    .navbar-item {
+        background-color: darkgreen; /* Color of the box */
+        padding: 10px 20px; /* Padding for the box */
+        border-radius: 10px; /* Rounded corners for the box */
+        margin-right: 60px; /* Add space between items */
+    }
+
+    .navbar a {
+        color: white; /* White text color for navbar links */
+        text-decoration: none; /* Remove underline from links */
+        font-weight: bolder;
+        font-size: 18px; /* Font size for navbar links */
+    }
+
+    .navbar a:hover {
+        color: yellowgreen; /* Underline navbar links on hover */
+    }
+
+    .logo img {
+        height: 100px; /* Adjust height of the logo */
+    }
+
+    /* Content container */
+    .container {
+        text-align: left;
+        padding-top: 80px; /* Add padding to make space for the fixed navbar */
+        padding-left: 40px; /* Adjust left padding */
+    }
+
+    /* Button styles */
+    .buttons-container {
+        display: flex;
+        justify-content: flex-start; /* Align buttons to the left */
+        margin-top: 50px; /* Adjust vertical margin */
+        padding-left: 40px; /* Adjust left padding */
+    }
+
+    .button {
+        background-color: darkgreen;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 18px;
+        margin: 0 10px; /* Adjust horizontal margin */
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        background-color: darkgreen;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navigation bar -->
+<div class="navbar">
+    <div class="logo">
+        <a href="home.html"><img class="logoimg" src="logo.PNG" alt="Logo"></a>
+    </div>
+    <div class="navbar-items">
+        <div class="navbar-item">
+            <a href="home.html">Home</a>
+        </div>
+        <div class="navbar-item">
+            <a href="about.html">About Us</a>
+        </div>
+        <div class="navbar-item">
+            <a href="blog.html">Blog</a>
+        </div>
+        <div class="navbar-item">
+            <a href="contactform.html">Contact Us</a>
+        </div>
+    </div>
+</div>
+
+<!-- Content container -->
+<div class="container">
+    <br><br><br><br><br><br><br><br>
+    <h1 style="color: darkgreen;">Welcome to AgroTech!</h1>
+    <p style="color: brown;">Kindly pick one and login to avail our services.</p>
+</div>
+
+<!-- Buttons -->
+<div class="buttons-container">
+    <a href="AgroCulture/index.php" class="button">Sell</a>
+    <a href="loginindex.php" class="button">Buy</a>
+</div>
+
+</body>
+</html>

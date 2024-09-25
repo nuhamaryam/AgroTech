@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Chatbot</title>
+    <style>
+        /* CSS styles */
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            background-image: url('faqs.jpg'); /* Added background image */
+        }
+
+        /* Header */
+        header {
+            background-color: lightblue; /* Changed navbar color to lightblue */
+            color: rgb(0, 0, 0);
+            padding: 10px 0;
+            width: 100%;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logoimg{
+            width: 200px;
+            margin-top: -1px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: black;
+            padding: 10px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            background-color: lightblue;
+            border-radius: 4px;
+            color: grey;
+        }
+
+        /* Chatbot styles */
+        #chat-container {
+            width: 500px;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px solid lightblue;
+            border-radius: 15px;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #chat-box {
+            height: 335px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        #user-input {
+            width: calc(100% - 70px);
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: darkgreen;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .user {
+            background-color: #dff0d8;
+            text-align: right;
+        }
+
+        .bot {
+            background-color: #d9edf7;
+            text-align: left;
+        }
+
+        /* Box container styles */
+        .box-container {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .box-content {
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="home.html"><img class="logoimg" src="logo.PNG"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="ss.html">Shop/Sell</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="chat-container">
+        <div id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Ask your question...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <!-- Box container -->
+    <div class="box-container">
+        <div class="box-content">
+            <p><b>AgroTech Fam, Hyderabad</b></p>
+            <p><b>Mobile No.: +91 8977656767</b></p>
+            <p><b>e-mail: agrotechhelpdesk@gmail.com</b></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code
+        function sendMessage() {
+            var userInput = document.getElementById("user-input").value;
+            if (userInput.trim() === "") return;
+
+            var chatBox = document.getElementById("chat-box");
+
+            // Display user message
+            displayMessage(userInput, "user");
+
+            // Process user input and generate bot response
+            var botResponse = generateBotResponse(userInput);
+
+            // Display bot response
+            displayMessage(botResponse, "bot");
+
+            // Clear input field
+            document.getElementById("user-input").value = "";
+
+            // Scroll to bottom of chat box
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function displayMessage(message, sender) {
+            var chatBox = document.getElementById("chat-box");
+            var messageElement = document.createElement("div");
+            messageElement.className = "message " + sender;
+            messageElement.innerText = message;
+            chatBox.appendChild(messageElement);
+        }
+
+        function generateBotResponse(userInput) {
+            // Keywords and their corresponding responses
+            var keywordResponses = [
+                { keyword: "hello", response: "Hello! How can I assist you today?" },
+                { keyword: "products", response: "We offer a wide range of agricultural products including seeds, fertilizers, and tools." },
+                { keyword: "delivery", response: "Our delivery service usually takes 3-5 business days." },
+                { keyword: "deliver", response: "Our delivery service usually takes 3-5 business days." },
+                { keyword: "contact", response: "You can contact us at agrotech@gmail.com or call us at 123-456-7890." },
+                { keyword: "countries", response: "Currently we ship only within India." },
+                { keyword: "places", response: "Currently we ship only within India." },
+                { keyword: "area", response: "Currently we ship only within India." },
+                { keyword: "return policy", response: "We provide exchange/refund only when the products are damaged. When the order reaches you, the delivery man will be opening it and a clip of the package being opened will be recorded as proof." },
+                { keyword: "payment methods", response: "We accept various payment methods including credit/debit cards, PayPal, and bank transfer." },
+                { keyword: "order processing", response: "Order processing typically takes 1-2 business days." },
+                { keyword: "order", response: "Order processing typically takes 1-2 business days. For other queries, use the contact us page or call us at ." },
+                { keyword: "cancel", response: "To cancel or modify an order, please contact our customer support team as soon as possible.(in less than 20 minutes of order being made.)" },
+                { keyword: "damaged", response: "We provide exchange/refund only when the products are damaged. When the order reaches you, the delivery man will be opening it and a clip of the package being opened will be recorded as proof.." },
+                { keyword: "damage", response: "We provide exchange/refund only when the products are damaged. When the order reaches you, the delivery man will be opening it and a clip of the package being opened will be recorded as proof." },
+                { keyword: "reschedule delivery", response: "To reschedule or change the delivery date, please contact our customer support team." }
+            ];
+
+            // Find matching response for any keyword in the user input
+            var botResponse = "Sorry, I didn't understand that. Contact us using the contact us page or call us at .";
+            userInput = userInput.toLowerCase();
+            keywordResponses.forEach(function (item) {
+                if (userInput.includes(item.keyword)) {
+                    botResponse = item.response;
+                }
+            });
+
+            return botResponse;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: yellowgreen;
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #fff;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 10px;
+            background-color: transparent;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            background-color: darkgreen;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            margin-top: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .articles {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .article {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px; /* Increased border radius */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increased box shadow */
+            width: calc(30% - 20px); /* Three articles in a row with margin */
+            box-sizing: border-box;
+        }
+
+        .article h2 {
+            color: #333;
+            font-size: 20px; /* Increased font size */
+            margin-bottom: 10px;
+        }
+
+        .article p {
+            color: #666;
+            font-size: 16px; /* Increased font size */
+            line-height: 1.6;
+        }
+
+        .article img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            display: block;
+            margin-top: 10px;
+            color: darkgreen;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .suggested-websites {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .suggested-websites h2 {
+            color: #333;
+        }
+
+        .suggested-websites ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .suggested-websites li {
+            margin-bottom: 10px;
+        }
+
+        .suggested-websites a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .suggested-websites a:hover {
+            text-decoration: underline;
+        }
+
+        .dialog-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .dialog-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .dialog-image {
+            max-width: 30%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .dialog-content {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+        }
+
+        footer {
+            background-color: yellowgreen;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 50px; /* Adjust as needed */
+        }
+
+        /* Adjusted style for article boxes inside the welcome container */
+        .welcome-container .article {
+            width: 80%; /* Adjust the width as needed */
+            margin-bottom: 30px; /* Adjust the margin as needed */
+        }
+
+        .question-mark-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        /* New style for the text */
+        .question-mark-text {
+            margin-right: 10px;
+            color: darkgreen;
+            font-weight: bold;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#"><img src="logo.png" alt="Logo"></a>
+            </div>
+            <div class="navbar-links">
+                <a href="home.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contactform.html">Contact Us</a>
+                <a href="https://www.google.com/maps/search/farms+in+Hyderabad,+Telangana/@17.4177371,78.5092874,15z/data=!3m1!4b1?entry=ttu">Locate</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <br>
+        <h1 style="color: yellowgreen;">Agricultural Waste into Useful Products.</h1>
+        <div class="articles">
+            <!-- Article 1 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Crop Residues to Biofuel</h2>
+                <img src="image1.jpg" alt="Image 1">
+                <p>Crop residues like corn stover and wheat straw are leftover plant materials after harvesting grains. 
+                    They contain sugars and cellulose, which can be converted into biofuels.</p>
+                <a href="#" class="read-more" onclick="openDialog('Crop Residues to Biofuel', 'image1.jpg', 'article1')">Read More</a>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Fruit and Vegetable Waste to Compost</h2>
+                <img src="image2.jpeg" alt="Image 2">
+                <p>Fruit and vegetable waste from households, markets, and processing plants 
+                    consist of peels, cores, and trimmings, rich in organic matter.</p>
+                <a href="#" class="read-more" onclick="openDialog('Fruit and Vegetable Waste to Compost', 'image2.jpeg', 'article2')">Read More</a>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Livestock Manure to Biogas</h2>
+                <img src="image3.jpeg" alt="Image 3">
+                <p>Livestock manure, such as cow dung and pig waste, contains organic matter 
+                    that can be anaerobically digested to produce biogas, a renewable energy source.</p>
+                <a href="#" class="read-more" onclick="openDialog('Livestock Manure to Biogas', 'image3.jpeg', 'article3')">Read More</a>
+            </div>
+
+            <!-- Article 4 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Poultry Litter to Organic Fertilizers</h2>
+                <img src="image4.jpeg" alt="Image 4">
+                <p>Poultry litter, comprising manure, bedding materials, and feathers, is a 
+                    valuable source of nutrients for plants.</p>
+                <a href="#" class="read-more" onclick="openDialog('Poultry Litter to Organic Fertilizers', 'image4.jpeg', 'article4')">Read More</a>
+            </div>
+
+            <!-- Article 5 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Rice Straw to Mushroom Cultivation</h2>
+                <img src="image5.jpeg" alt="Image 5">
+                <p>Rice straw, a by-product of rice harvesting, can be used as a substrate 
+                    for growing mushrooms such as oyster mushrooms.</p>
+                <a href="#" class="read-more" onclick="openDialog('Rice Straw to Mushroom Cultivation', 'image5.jpeg', 'article5')">Read More</a>
+            </div>
+
+            <!-- Article 6 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Corn Cobs to Animal Bedding</h2>
+                <img src="image6.jpeg" alt="Image 6">
+                <p>Corn cobs, the central part of corn ears, can be dried and processed 
+                    into bedding material for livestock and poultry.</p>
+                <a href="#" class="read-more" onclick="openDialog('Corn Cobs to Animal Bedding', 'image6.jpeg', 'article6')">Read More</a>
+            </div>
+
+            <!-- Article 7 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Sugarcane Bagasse to Livestock Feed</h2>
+                <img src="image7.jpeg" alt="Image 7">
+                <p>Sugarcane bagasse, the fibrous residue left after juice extraction,
+                     can be used as feed for livestock.</p>
+                <a href="#" class="read-more" onclick="openDialog('Sugarcane Bagasse to Livestock Feed', 'image7.jpeg', 'article7')">Read More</a>
+            </div>
+
+            <!-- Article 8 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Coffee Grounds to Soil Amendment</h2>
+                <img src="image8.jpeg" alt="Image 8">
+                <p>Used coffee grounds are a common waste product generated by coffee consumption.</p>
+                <a href="#" class="read-more" onclick="openDialog('Coffee Grounds to Soil Amendment', 'image8.jpeg', 'article8')">Read More</a>
+            </div>
+
+            <!-- Article 9 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Grape Pomace to Animal Feed</h2>
+                <img src="image9.jpeg" alt="Image 9">
+                <p>Grape pomace, the solid residue left after winemaking, contains skins, seeds and stems.</p>
+                <a href="#" class="read-more" onclick="openDialog('Grape Pomace to Animal Feed', 'image9.jpeg', 'article9')">Read More</a>
+            </div>
+
+            <!-- Article 10 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Wheat Chaff to Biochar</h2>
+                <img src="image10.jpeg" alt="Image 10">
+                <p>Wheat chaff, the outer husk of wheat grains, can be converted into biochar, a stable form of carbon.</p>
+                <a href="#" class="read-more" onclick="openDialog('Wheat Chaff to Biochar', 'image10.jpeg', 'article10')">Read More</a>
+            </div>
+
+            <!-- Article 11 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Coconut Husks to Mulch</h2>
+                <img src="image11.jpeg" alt="Image 11">
+                <p>Coconut husks are the fibrous outer shell of coconuts, often considered a waste product.</p>
+                <a href="#" class="read-more" onclick="openDialog('Coconut Husks to Mulch', 'image11.jpeg', 'article11')">Read More</a>
+            </div>
+
+            <!-- Article 12 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Banana Peels to Vermicompost</h2>
+                <img src="image12.jpeg" alt="Image 12">
+                <p>Banana peels, a common kitchen waste item, can be recycled into nutrient-rich vermicompost using earthworms.</p>
+                <a href="#" class="read-more" onclick="openDialog('Banana Peels to Vermicompost', 'image12.jpeg', 'article12')">Read More</a>
+            </div>
+
+            <!-- Article 13 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Aquaculture Waste to Fish Feed</h2>
+                <img src="image13.jpg" alt="Image 13">
+                <p>Aquaculture operations generate waste in the form of uneaten feed, feces, and dead organisms.</p>
+                <a href="#" class="read-more" onclick="openDialog('Aquaculture Waste to Fish Feed', 'image13.jpg', 'article13')">Read More</a>
+            </div>
+
+            <!-- Article 14 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Sunflower Stalks to Biomass Briquettes</h2>
+                <img src="image14.webp" alt="Image 14">
+                <p>Sunflower stalks, left over after harvesting sunflower seeds, can be compacted into biomass briquettes for use as fuel.</p>
+                <a href="#" class="read-more" onclick="openDialog('Sunflower Stalks to Biomass Briquettes', 'image14.webp', 'article14')">Read More</a>
+            </div>
+
+            <!-- Article 15 -->
+            <div class="article">
+                <h2 style="color: darkgreen;">Cotton Gin Trash to Soil Erosion Control</h2>
+                <img src="image15.jpeg" alt="Image 15">
+                <p>Cotton gin trash, consisting of stems, leaves, and seed hulls, is a by-product of cotton ginning.</p>
+                <a href="#" class="read-more" onclick="openDialog('Cotton Gin Trash to Soil Erosion Control', 'image15.jpeg', 'article15')">Read More</a>
+            </div>
+        </div>
+        <div class="question-mark-container">
+            <div class="question-mark-text">Click the icon<br>Avail Services</div>
+            <a href="https://www.eai.in/solutions/indea/da/124/st">
+                <img src="agro.png" alt="Avail services" id="question-mark">
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; AgroTech 2024. All rights reserved.</p>
+    </footer>
+
+ <!-- Article Dialogs -->
+  <!-- You can use a loop in JavaScript to generate these dialogs dynamically based on the number of articles -->
+<!-- Article 1 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article1">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article1')">X</span>
+        <h2 id="dialog-title">Crop Residues to Biofuel</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article1" class="dialog-image">
+        <div id="dialog-content-article1" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Crop residues like corn stover and wheat straw are leftover plant materials after harvesting grains. They contain sugars and cellulose, which can be converted into biofuels.</p>
+            <h3>Utilization</h3>
+            <p>These residues are processed to extract sugars, which are then fermented into bioethanol or converted into biodiesel, providing renewable energy sources.</p>
+            <h3>Process</h3>
+            <p>1. Collect crop residues after harvest.<br>
+                2. Chop or shred the residues into smaller pieces to increase surface area.<br>
+                3. Pretreat the chopped residues with chemicals or enzymes to break down the tough cell walls and release sugars.<br>
+                4. Ferment the released sugars using yeast or bacteria to produce ethanol.<br>
+                5. Distill the fermented mixture to separate ethanol from water and other by-products.<br>
+                6. For biodiesel production, extract oils from the residues and process them into biodiesel through transesterification.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 2 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article2">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article2')">X</span>
+        <h2 id="dialog-title">Fruit and Vegetable Waste to Compost</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article2" class="dialog-image">
+        <div id="dialog-content-article2" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Fruit and vegetable waste from households, markets, and processing plants consist of peels, cores, and trimmings, rich in organic matter.</p>
+            <h3>Utilization</h3>
+            <p>Composting this waste transforms it into nutrient-rich compost, which improves soil health and fertility.</p>
+            <h3>Process</h3>
+            <p> 1. Collect fruit and vegetable waste and mix it with dry, carbon-rich materials like leaves or shredded paper to create a balanced carbon-to-nitrogen ratio.<br>
+                2. Layer the mixture in a compost bin or pile, ensuring proper aeration and moisture levels.<br>
+                3. Turn the compost regularly to aerate and mix the materials, speeding up decomposition.<br>
+                4. Monitor the compost temperature and moisture content to optimize microbial activity.<br>
+                5. After several weeks to months, the compost will mature into a dark, crumbly material, ready for use in gardens or landscaping.
+           </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 3 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article3">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article3')">X</span>
+        <h2 id="dialog-title">Livestock Manure to Biogas</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article3" class="dialog-image">
+        <div id="dialog-content-article3" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Livestock manure, such as cow dung and pig waste, contains organic matter that can be anaerobically digested to produce biogas, a renewable energy source.</p>
+            <h3>Utilization</h3>
+            <p>Biogas can be used for cooking, heating, or electricity generation, while the residual digestate serves as a nutrient-rich fertilizer.</p>
+            <h3>Process</h3>
+            <p> 1. Collect livestock manure and transfer it to an anaerobic digester, a sealed container where anaerobic bacteria break down organic matter.<br>
+                2. Maintain optimal temperature, moisture, and pH levels within the digester to promote microbial activity.<br>
+                3. Allow the digestion process to occur over several days to weeks, during which methane and carbon dioxide gases are released.<br>
+                4. Collect the biogas produced in the digester and store it for use.<br>
+                5. After digestion, the remaining digestate is rich in nutrients and can be applied to fields as organic fertilizer.
+           </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 4 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article4">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article4')">X</span>
+        <h2 id="dialog-title">Poultry Litter to Organic Fertilizers</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article4" class="dialog-image">
+        <div id="dialog-content-article4" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Poultry litter, comprising manure, bedding materials, and feathers, is a valuable source of nutrients for plants.</p>
+            <h3>Utilization</h3>
+            <p>Composting or pelletizing poultry litter creates organic fertilizers that improve soil fertility and structure.</p>
+            <h3>Process</h3>
+            <p>1. Collect poultry litter and mix it with bulking agents like sawdust or straw to balance moisture and carbon levels.<br>
+                2. Form the mixture into compost piles or feed it into a pelletizing machine.<br>
+                3. For composting, regularly turn the piles to aerate and speed up decomposition, monitoring temperature and moisture levels.<br>
+                4. For pelletizing, dry the mixture and compress it into pellets of uniform size for easy handling and application.<br>
+                5. Once composted or pelletized, the poultry litter can be spread on fields or gardens to provide essential nutrients for plant growth.<br>
+           </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 5 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article5">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article5')">X</span>
+        <h2 id="dialog-title">Rice Straw to Mushroom Cultivation</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article5" class="dialog-image">
+        <div id="dialog-content-article5" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Rice straw, a by-product of rice harvesting, can be used as a substrate for growing mushrooms such as oyster mushrooms.</p>
+            <h3>Utilization</h3>
+            <p>Mushroom cultivation on rice straw provides an additional income stream for farmers and reduces agricultural waste.</p>
+            <h3>Process</h3>
+            <p>1. Prepare rice straw by chopping it into small pieces and pasteurizing it to kill competing microorganisms.<br>
+                2. Inoculate the pasteurized straw with mushroom spawn, evenly distributing it throughout the substrate.<br>
+                3. Pack the inoculated straw into containers or beds, maintaining high humidity and temperatures suitable for mushroom growth.<br>
+                4. Monitor the mycelium colonization, ensuring proper ventilation and humidity levels.<br>
+                5. After several weeks, mushrooms will start to fruit from the substrate, ready for harvest.<br>
+                6. Repeat the process with fresh straw for successive mushroom crops.
+           </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 6 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article6">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article6')">X</span>
+        <h2 id="dialog-title">Corn Cobs to Animal Bedding</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article6" class="dialog-image">
+        <div id="dialog-content-article6" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Corn cobs, the central part of corn ears, can be dried and processed into bedding material for livestock and poultry.</p>
+            <h3>Utilization</h3>
+            <p>Corn cob bedding provides a comfortable and absorbent surface for animals, improving their living conditions.</p>
+            <h3>Process</h3>
+            <p>1. Collect corn cobs after corn harvest and remove any remaining kernels.<br>
+                2. Dry the cobs to reduce moisture content and prevent mold growth.<br>
+                3. Crush or grind the dried cobs into smaller particles to create bedding material.<br>
+                4. Spread the processed cobs in animal housing areas to provide a clean and comfortable surface for animals to rest on.
+           </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 7 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article7">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article7')">X</span>
+        <h2 id="dialog-title">Sugarcane Bagasse to Livestock Feed</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article7" class="dialog-image">
+        <div id="dialog-content-article7" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Sugarcane bagasse, the fibrous residue left after juice extraction, can be used as feed for livestock.</p>
+            <h3>Utilization</h3>
+            <p>Bagasse provides dietary fiber and energy for ruminant animals such as cattle and sheep.</p>
+            <h3>Process</h3>
+            <p> 1. Collect sugarcane bagasse from sugar mills after juice extraction.<br>
+                2. Dry the bagasse to reduce moisture content and improve shelf life.<br>
+                3. Process the dried bagasse into pellets or cubes for easy handling and feeding.<br>
+                4. Incorporate bagasse into livestock feed formulations to provide supplemental fiber and energy.
+           </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 8 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article8">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article8')">X</span>
+        <h2 id="dialog-title">Coffee Grounds to Soil Amendment</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article8" class="dialog-image">
+        <div id="dialog-content-article8" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Used coffee grounds are a common waste product generated by coffee consumption.</p>
+            <h3>Utilization</h3>
+            <p>Coffee grounds can be composted or applied directly to soil as a nutrient-rich amendment, improving soil health and fertility.</p>
+            <h3>Process</h3>
+            <p> 1. Collect used coffee grounds from coffee shops, cafes, or households.<br>
+                2. Mix the coffee grounds with other organic materials such as leaves or yard waste to balance carbon and nitrogen ratios.<br>
+                3. Incorporate the mixture into compost bins or piles, ensuring proper aeration and moisture levels.<br>
+                4. Turn the compost regularly to facilitate decomposition and microbial activity.<br>
+                5. After several weeks to months, the composted coffee grounds can be applied to soil as a natural fertilizer and soil conditioner.
+           </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 9 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article9">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article9')">X</span>
+        <h2 id="dialog-title">Grape Pomace to Animal Feed</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article9" class="dialog-image">
+        <div id="dialog-content-article9" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Grape pomace, the solid residue left after winemaking, contains skins, seeds and stems.</p>
+            <h3>Utilization</h3>
+            <p>Dried grape pomace can be used as a feed supplement for livestock, providing fiber, antioxidants, and nutrients.</p>
+            <h3>Process</h3>
+            <p> 1. Collect grape pomace from wineries after wine production.<br>
+                2. Dry the pomace to reduce moisture content and preserve nutritional value.<br>
+                3. Process the dried pomace into pellets or meal for easy handling and feeding.<br>
+                4. Incorporate grape pomace into livestock feed formulations to enhance nutrient content and palatability.
+           </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 10 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article10">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article10')">X</span>
+        <h2 id="dialog-title">Wheat Chaff to Biochar</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article10" class="dialog-image">
+        <div id="dialog-content-article10" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Wheat chaff, the outer husk of wheat grains, can be converted into biochar, a stable form of carbon.</p>
+            <h3>Utilization</h3>
+            <p>Biochar improves soil fertility, water retention, and nutrient availability when applied to agricultural land.</p>
+            <h3>Process</h3>
+            <p>1. Collect wheat chaff from wheat harvesting operations.<br>
+                2. Heat the chaff in a low-oxygen environment through a process called pyrolysis, which breaks down organic matter into biochar.<br>
+                3. Cool and collect the resulting biochar, which can be ground into a fine powder or used as granules for soil application.<br>
+                4. Incorporate biochar into soil to improve soil structure, water holding capacity, and nutrient retention.
+          </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 11 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article11">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article11')">X</span>
+        <h2 id="dialog-title">Coconut Husks to Mulch</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article11" class="dialog-image">
+        <div id="dialog-content-article11" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Coconut husks are the fibrous outer shell of coconuts, often considered a waste product.</p>
+            <h3>Utilization</h3>
+            <p>Coconut husks can be shredded and used as mulch in gardening and landscaping applications.</p>
+            <h3>Process</h3>
+            <p> 1. Collect coconut husks from coconut processing facilities or agricultural areas.<br>
+                2. Shred the husks into smaller pieces using a shredder or chipper.<br>
+                3. Spread the shredded husks around plants and garden beds to suppress weeds, retain moisture, and regulate soil temperature.
+          </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 12 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article12">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article12')">X</span>
+        <h2 id="dialog-title">Banana Peels to Vermicompost</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article12" class="dialog-image">
+        <div id="dialog-content-article12" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Banana peels, a common kitchen waste item, can be recycled into nutrient-rich vermicompost using earthworms.</p>
+            <h3>Utilization</h3>
+            <p>Vermicompost provides essential nutrients and beneficial microbes for plant growth, making it an excellent organic fertilizer.</p>
+            <h3>Process</h3>
+            <p>      1. Collect banana peels and other kitchen scraps like vegetable trimmings.<br>
+                2. Place the organic waste in a vermicomposting bin or container.<br>
+                3. Introduce composting worms, such as red wigglers, to the bin.<br>
+                4. Allow the worms to consume the organic matter and transform it into nutrient-rich vermicompost.<br>
+                5. Harvest the vermicompost periodically and use it to fertilize garden plants or potted crops.
+          </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 13 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article13">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article13')">X</span>
+        <h2 id="dialog-title">Aquaculture Waste to Fish Feed</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article13" class="dialog-image">
+        <div id="dialog-content-article13" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Aquaculture operations generate waste in the form of uneaten feed, feces, and dead organisms.</p>
+            <h3>Utilization</h3>
+            <p>Waste from aquaculture can be converted into fish feed through processes like microbial fermentation or insect rearing.</p>
+            <h3>Process</h3>
+            <p>      1. Collect aquaculture waste from fish farms or shrimp ponds.<br>
+                2. Process the waste through microbial fermentation to produce single-cell protein or use it as a substrate for insect rearing.<br>
+                3. Rear insects such as black soldier fly larvae or mealworms on the waste substrate.<br>
+                4. Harvest the grown insects and process them into high-protein fish feed pellets or meal.<br>
+                5. Feed the insect-based feed to farmed fish or shrimp as a sustainable and nutritious diet.
+          </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 14 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article14">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article14')">X</span>
+        <h2 id="dialog-title">Sunflower Stalks to Biomass Briquettes</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article14" class="dialog-image">
+        <div id="dialog-content-article14" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Sunflower stalks, left over after harvesting sunflower seeds, can be compacted into biomass briquettes for use as fuel.</p>
+            <h3>Utilization</h3>
+            <p>Biomass briquettes provide a renewable energy source for heating and cooking, reducing reliance on fossil fuels.</p>
+            <h3>Process</h3>
+            <p>      1. Collect sunflower stalks from agricultural fields after seed harvesting.<br>
+                2. Chop or shred the stalks into smaller pieces to increase surface area.<br>
+                3. Dry the chopped stalks to reduce moisture content and enhance combustion efficiency.<br>
+                4. Compact the dried stalks into biomass briquettes using a briquetting machine or press.<br>
+                5. Store the briquettes for use as an eco-friendly fuel alternative to firewood or charcoal.
+          </p>
+        </div>
+    </div>
+</div>
+
+<!-- Article 15 Dialog -->
+<div class="dialog-overlay" id="dialog-overlay-article15">
+    <div class="dialog-box">
+        <span class="close-btn" onclick="closeDialog('dialog-overlay-article15')">X</span>
+        <h2 id="dialog-title">Cotton Gin Trash to Soil Erosion Control</h2>
+        <img src="" alt="Dialog Image" id="dialog-image-article15" class="dialog-image">
+        <div id="dialog-content-article15" class="dialog-content">
+            <h3>Overview</h3>
+            <p>Cotton gin trash, consisting of stems, leaves, and seed hulls, is a by-product of cotton ginning.</p>
+            <h3>Utilization</h3>
+            <p>Cotton gin trash can be spread on fields as a mulch or ground cover to prevent soil erosion and improve soil health.</p>
+            <h3>Process</h3>
+            <p> 1. Collect cotton gin trash from cotton ginning facilities or agricultural fields.<br>
+                2. Shred or chop the trash into smaller pieces for easier handling and application.<br>
+                3. Spread the shredded trash evenly across fields prone to erosion or soil degradation.<br>
+                4. Allow the trash to decompose over time, adding organic matter and nutrients to the soil while providing erosion control.
+          </p>
+        </div>
+    </div>
+</div>
+
+<!-- Update the openDialog function -->
+<script>
+    function openDialog(title, imageSrc, contentId) {
+        // Show the dialog overlay based on contentId
+        var dialogId = "dialog-overlay-" + contentId;
+        document.getElementById(dialogId).style.display = "block";
+        // Set dialog content based on contentId
+        document.getElementById("dialog-title").textContent = title;
+        document.getElementById("dialog-image-" + contentId).src = imageSrc;
+        document.getElementById("dialog-content-" + contentId).style.display = "block";
+    }
+
+    function closeDialog(dialogId) {
+        // Hide the specified dialog overlay
+        document.getElementById(dialogId).style.display = "none";
+    }
+</script>
+
+</body>
+</html>
